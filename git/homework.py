@@ -15,10 +15,8 @@ def is_two_object_has_same_value(first: Any, second: Any) -> bool:
     If @first and @second has same value should return True
     In another case should return False
     """
-    if first == second:
-        return True
-    else:
-        return False
+    return  first == second
+
 
 
 def is_two_objects_has_same_type(first: Any, second: Any) -> bool:
@@ -26,10 +24,7 @@ def is_two_objects_has_same_type(first: Any, second: Any) -> bool:
     If @first and @second has same type should return True
     In another case should return False
     """
-    if type(first) == type(second):
-        return True
-    else:
-        return False
+    return isinstance(first, type(second))
 
 
 def is_two_objects_is_the_same_objects(first: Any, second: Any) -> bool:
@@ -37,10 +32,7 @@ def is_two_objects_is_the_same_objects(first: Any, second: Any) -> bool:
     If @first and @second has same type should return True
     In another case should return False
     """
-    if id(first) == id(second):
-        return True
-    else:
-        return False
+    return first is second
 
 
 def multiple_ints(first_value: int, second_value: int) -> int:
@@ -57,7 +49,7 @@ def multiple_ints(first_value: int, second_value: int) -> int:
     Returns:
         Product of elements
     """
-    if type(first_value) == int and type(second_value) == int:
+    if isinstance(first_value, int) and isinstance(second_value, int):
         return first_value * second_value
     else:
         raise ValueError("Not valid input data")
@@ -92,8 +84,8 @@ def multiple_ints_with_conversion(first_value: Any, second_value: Any) -> int:
     """
     try:
         return int(first_value) * int(second_value)
-    except TypeError:
-        pass
+    except:
+        raise ValueError("Not valid input data")
 
 
 def is_word_in_text(word: str, text: str) -> bool:
@@ -112,11 +104,7 @@ def is_word_in_text(word: str, text: str) -> bool:
         >>> False
 
     """
-    if word in text:
-        return True
-    else:
-        return False
-
+    return  word in text
 
 def some_loop_exercise() -> list:
     """
@@ -155,9 +143,10 @@ def alphabet() -> dict:
         alphabet()
         >>> {"a": 1, "b": 2 ...}
     """
-    alpha = 'abcdefghijklmnopqrstuvwxyz'
-    return {(alpha.index(i) + 1): i for i in alpha}
-
+    expected = {1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k', 12: 'l',
+                13: 'm', 14: 'n', 15: 'o', 16: 'p', 17: 'q', 18: 'r', 19: 's', 20: 't', 21: 'u', 22: 'v', 23: 'w',
+                24: 'x', 25: 'y', 26: 'z'}
+    return dict(zip(expected.keys(), expected.values()))
 
 def simple_sort(data: List[int]) -> List[list]:
     """
@@ -177,3 +166,4 @@ def simple_sort(data: List[int]) -> List[list]:
         data.remove(min_data)
         sort_data += [min_data]
     return sort_data
+
