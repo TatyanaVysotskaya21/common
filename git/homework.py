@@ -1,7 +1,7 @@
 """
 This is a list of functions that should be completed.
 """
-
+import string
 from typing import Any
 from typing import List
 
@@ -143,10 +143,8 @@ def alphabet() -> dict:
         alphabet()
         >>> {"a": 1, "b": 2 ...}
     """
-    expected = {1: 'a', 2: 'b', 3: 'c', 4: 'd', 5: 'e', 6: 'f', 7: 'g', 8: 'h', 9: 'i', 10: 'j', 11: 'k', 12: 'l',
-                13: 'm', 14: 'n', 15: 'o', 16: 'p', 17: 'q', 18: 'r', 19: 's', 20: 't', 21: 'u', 22: 'v', 23: 'w',
-                24: 'x', 25: 'y', 26: 'z'}
-    return dict(zip(expected.keys(), expected.values()))
+    alpha = string.ascii_lowercase
+    return {(alpha.index(i) + 1): i for i in alpha}
 
 def simple_sort(data: List[int]) -> List[list]:
     """
