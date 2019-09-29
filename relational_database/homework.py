@@ -1,6 +1,5 @@
 from typing import List
 
-
 def task_1_add_new_record_to_db(con) -> None:
     """
     Add a record for a new customer from Singapore
@@ -90,7 +89,7 @@ def task_8_count_customers_by_city(cur):
         cur: psycopg cursor
     Returns: 69 records in descending order
     """
-    cur.execute("*")
+    cur.execute("SELECT City, COUNT(*) FROM Customers GROUP BY City ;")
     return cur.fetchall()
 
 
