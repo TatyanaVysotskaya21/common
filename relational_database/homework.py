@@ -89,7 +89,7 @@ def task_8_count_customers_by_city(cur):
         cur: psycopg cursor
     Returns: 69 records in descending order
     """
-    cur.execute("SELECT City, COUNT(*) FROM Customers GROUP BY City ;")
+    cur.execute("SELECT City, COUNT(*) FROM Customers GROUP BY City ORDER BY COUNT(*) DESC;")
     return cur.fetchall()
 
 
@@ -120,7 +120,7 @@ def task_11_list_customers_starting_from_11th(cur):
         cur: psycopg cursor
     Returns: 11 records
     """
-    cur.execute("SELECT CustomerID, CustomerName FROM Customers WHERE CustomerID > 10;")
+    cur.execute("SELECT CustomerID, CustomerName FROM Customers WHERE CustomerID > 11;")
     return cur.fetchall()
 
 
@@ -164,7 +164,7 @@ def task_15_list_customers_with_any_order_or_not(cur):
         cur: psycopg cursor
     Returns: 213 records
     """
-    cur.execute("SELECT c.CustomerName, o.OrderID FROM Customers AS c LEFT JOIN Orders AS o ON c.CustomerID = o.CustomerID;")
+    cur.execute("SELECT c.CustomerName,c.ContactName, c.Country, o.OrderID FROM Customers AS c LEFT JOIN Orders AS o ON c.CustomerID = o.CustomerID ORDER BY o.OrderID;")
     return cur.fetchall()
 
 
@@ -175,5 +175,5 @@ def task_16_match_all_customers_and_suppliers_by_country(cur):
         cur: psycopg cursor
     Returns: 194 records
     """
-    cur.execute("SELECT c.CustomerName,s.SupplierName, s.Country FROM Customers AS c, Suppliers AS s WHERE c.Country = s.Country ORDER BY s.Country;")
+    cur.execute("SELECT c.CustomerName, c.Country AS CustomerCountry, s.Country AS SupplierCountry, s.SupplierName FROM Customers AS c FULL OUTER JOIN Suppliers AS s ON c.Country = s.Country ORDER BY c.Country, s.Country;")
     return cur.fetchall()
