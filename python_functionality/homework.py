@@ -76,17 +76,6 @@ def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
     """
     Find minimum value by given key
     Returns:
-        members = [
-            {'age': 43, 'name': 'Denis'},
-            {'age': 49, 'name': 'Roman'},
-            {'age': 36, 'name': 'Godzilla'},
-            {'age': 47, 'name': 'Spike'},
-            {'name': 'SuperMan'},
-            {'age': 49, 'name': 'Batman'},
-            {'age': 37, 'name': 'Claus'},
-            {'age': 55, 'name': 'Frank'},
-            {'age': 83, 'name': 'Homer'}
-
     """
     key_value_list = []
     for i in data:
