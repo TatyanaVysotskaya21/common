@@ -46,9 +46,12 @@ def task_3_find_item_via_value(data, value) -> DT:
         find_item_via_value([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 26)
         >>> [{'name': 'Alex', 'age': 26}]
     """
+    data_search = []
     for students in data:
         if value in students.values():
-            return [students]
+            data_search.append([students])
+    for i in data_search:
+        return i
 
 
 def task_4_min_value_integers(data) -> int:
