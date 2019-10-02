@@ -1,4 +1,5 @@
 from typing import List, Dict, Union, Generator
+import pytest
 
 # We will work with such dicts
 ST = Dict[str, Union[str, int]]
@@ -61,15 +62,12 @@ def task_5_min_value_strings(data) -> str:
     """
     Find the longest string
     """
-    n_str = ''
     if len(data) > 0:
-        n = len(str(data[0]))
-        for i in data:
-            if len(str(i)) < n:
-                n = len(str(i))
-                n_str = str(i)
-    if len(n_str) > 0:
-        return n_str
+        stand = str(data[0])
+        for i in range(1, len(data)):
+            if len(str(data[i])) <= len(stand):
+                stand = str(data[i])
+        return str(stand)
 
 
 def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
@@ -116,12 +114,10 @@ def task_9_sum_characters_positions(text) -> int:
         >>> 532
 
     """
-    text_list = text.split()
-    s = 0
-    for i in text_list:
-        for y in i:
-            s += ord(y)
-    return s + ord(' ')*(len(text_list)-1)
+    sum_characters_positions = 0
+    for i in text:
+        sum_characters_positions += ord(i)
+    return sum_characters_positions
 
 def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
     """
@@ -136,12 +132,11 @@ def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
     """
     n = 2
     yield n
-    while n < 200:
+    while True:
         n += 1
         k = 0
-        for i in [2, 3, 5, 7, 11]:
+        for i in range(2, n + 1):
             if n % i == 0:
                 k += 1
-        if k == 0 or (k ==1 and n  in [3, 5, 7, 11]):
+        if k == 1:
             yield n
-
