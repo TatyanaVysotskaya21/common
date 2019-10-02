@@ -132,7 +132,7 @@ def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
     """
     n = 2
     yield n
-    while True:
+    while n < 200:
         n += 1
         k = 0
         for i in range(2, n + 1):
