@@ -130,13 +130,6 @@ def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
         next(a)
         >>> 3
     """
-    n = 2
-    yield n
-    while n < 200:
-        n += 1
-        k = 0
-        for i in range(2, n + 1):
-            if n % i == 0:
-                k += 1
-        if k == 1:
-            yield n
+    for number in range(2, 200):
+        if all(number % i != 0 for i in range(2, number)):
+            yield number
