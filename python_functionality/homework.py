@@ -1,5 +1,4 @@
 from typing import List, Dict, Union, Generator
-import pytest
 
 # We will work with such dicts
 ST = Dict[str, Union[str, int]]
@@ -7,7 +6,7 @@ ST = Dict[str, Union[str, int]]
 DT = List[ST]
 
 
-def task_1_fix_names_start_letter(data) -> DT:
+def task_1_fix_names_start_letter(data_list) -> DT:
     """
     Make all `names` field in list of students to start from upper letter
 
@@ -15,14 +14,13 @@ def task_1_fix_names_start_letter(data) -> DT:
         fix_names_start_letters([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}])
         >>> [{'name': 'Alex', 'age': 26}, {'name': 'Denys', 'age': 89}]
     """
-    for i in data:
-        for k, v in i.items():
-            if k == 'name':
-                if v.istitle() is False:
-                    i[k] = v.capitalize()
+    for dict_in_data in data_list:
+        for key, value in dict_in_data.items():
+            if key == 'name' and value.istitle() is False: 
+                    dict_in_data[key] = value.capitalize()
             else:
                 continue
-    return data
+    return data_list
 
 def task_2_remove_dict_fields(data, redundant_keys) -> DT:
     """given_data
@@ -33,9 +31,9 @@ def task_2_remove_dict_fields(data, redundant_keys) -> DT:
         >>> [{'name': 'Alex'}, {'name': 'denys'}]
     """
     for name in data:
-        for i in redundant_keys:
-            if i in name.keys():
-                del name[i]
+        for key in redundant_keys:
+            if key in name.keys():
+                del name[key]
     return data
 
 
@@ -46,12 +44,12 @@ def task_3_find_item_via_value(data, value) -> DT:
         find_item_via_value([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 26)
         >>> [{'name': 'Alex', 'age': 26}]
     """
-    data_search = []
+    sorting_data_list = []
     for students in data:
         if value in students.values():
-            data_search.append([students])
-    for i in data_search:
-        return i
+            sorting_data_list.append([students])
+    for value in sorting_data_list:
+        return value
 
 
 def task_4_min_value_integers(data) -> int:
@@ -66,11 +64,12 @@ def task_5_min_value_strings(data) -> str:
     Find the longest string
     """
     if len(data) > 0:
-        stand = str(data[0])
-        for i in range(1, len(data)):
-            if len(str(data[i])) <= len(stand):
-                stand = str(data[i])
-        return str(stand)
+        data = [str(value) for value in data]
+        value_min = data[0]
+        for counter, value in enumerate(data):
+            if len(value) < len(value_min):
+                value_min = value
+        return value_min
 
 
 def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
@@ -79,23 +78,23 @@ def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
     Returns:
     """
     key_value_list = []
-    for i in data:
-        if key in i.keys():
-            key_value_list += [i[key]]
-    for i in data:
-        if i[key] == min(key_value_list):
-            return i
+    for dict_value in data:
+        if key in dict_value.keys():
+            key_value_list += [dict_value.get(key)]
+    for value in data:
+        if min(key_value_list) in value.values():
+            return value
 
 def task_7_max_value_list_of_lists(data) -> int:
     """
     Find max value from list of lists
     """
-    n = 0
-    for i in data:
-        for j in i:
-            if j > n:
-                n = j
-    return n
+    comparison_value = 0
+    for data_element in data:
+        for value in data_element:
+            if value > comparison_value:
+                comparison_value = value
+    return comparison_value
 
 def task_8_sum_of_ints(data) -> int:
     """
@@ -118,8 +117,8 @@ def task_9_sum_characters_positions(text) -> int:
 
     """
     sum_characters_positions = 0
-    for i in text:
-        sum_characters_positions += ord(i)
+    for character_in_str in text:
+        sum_characters_positions += ord(character_in_str)
     return sum_characters_positions
 
 def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
