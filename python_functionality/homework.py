@@ -16,7 +16,7 @@ def task_1_fix_names_start_letter(data_list) -> DT:
     """
     for dict_in_data in data_list:
         for key, value in dict_in_data.items():
-            if key == 'name' and value.istitle() is False: 
+            if key == 'name' and value.istitle() is False:
                     dict_in_data[key] = value.capitalize()
             else:
                 continue
@@ -30,11 +30,12 @@ def task_2_remove_dict_fields(data, redundant_keys) -> DT:
        remove_dict_field([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 'age')
         >>> [{'name': 'Alex'}, {'name': 'denys'}]
     """
-    for name in data:
+    new_data = []
+    for value_dict in data:
         for key in redundant_keys:
-            if key in name.keys():
-                del name[key]
-    return data
+            if key not in value_dict.keys():
+                new_data += value_dict
+    return new_data
 
 
 def task_3_find_item_via_value(data, value) -> DT:
