@@ -43,10 +43,8 @@ def task_3_find_item_via_value(data, value) -> DT:
     sorting_data_list = []
     for students in data:
         if value in students.values():
-            sorting_data_list.append([students])
-    for value in sorting_data_list:
-        return value
-
+            sorting_data_list.append(students)
+    return sorting_data_list
 
 def task_4_min_value_integers(data) -> int:
     """
