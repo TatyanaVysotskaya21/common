@@ -14,13 +14,8 @@ def task_1_fix_names_start_letter(data_list) -> DT:
         fix_names_start_letters([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}])
         >>> [{'name': 'Alex', 'age': 26}, {'name': 'Denys', 'age': 89}]
     """
-    for dict_in_data in data_list:
-        for key, value in dict_in_data.items():
-            if key == 'name' and value.istitle() is False:
-                    dict_in_data[key] = value.capitalize()
-            else:
-                continue
-    return data_list
+    return [dict_in_data.get('name').capitalize() for dict_in_data in data_list if 'name' is dict_in_data.keys()]
+
 
 def task_2_remove_dict_fields(data, redundant_keys) -> DT:
     """given_data
@@ -60,6 +55,7 @@ def task_4_min_value_integers(data) -> int:
     if len(data) > 0:
         return min(data)
 
+
 def task_5_min_value_strings(data) -> str:
     """
     Find the longest string
@@ -86,6 +82,7 @@ def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
         if min(key_value_list) in value.values():
             return value
 
+
 def task_7_max_value_list_of_lists(data) -> int:
     """
     Find max value from list of lists
@@ -96,6 +93,7 @@ def task_7_max_value_list_of_lists(data) -> int:
             if value > comparison_value:
                 comparison_value = value
     return comparison_value
+
 
 def task_8_sum_of_ints(data) -> int:
     """
@@ -115,12 +113,12 @@ def task_9_sum_characters_positions(text) -> int:
         >>> 65
         task_9_sum_characters_positions("hello")
         >>> 532
-
     """
     sum_characters_positions = 0
     for character_in_str in text:
         sum_characters_positions += ord(character_in_str)
     return sum_characters_positions
+
 
 def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
     """
@@ -136,3 +134,5 @@ def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
     for number in range(2, 200):
         if all(number % i != 0 for i in range(2, number)):
             yield number
+
+
