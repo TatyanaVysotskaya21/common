@@ -25,12 +25,7 @@ def task_2_remove_dict_fields(data, redundant_keys) -> DT:
        remove_dict_field([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 'age')
         >>> [{'name': 'Alex'}, {'name': 'denys'}]
     """
-    new_data = []
-    for value_dict in data:
-        for key in redundant_keys:
-            if key not in value_dict.keys():
-                new_data += value_dict
-    return new_data
+    return [value_dict for value_dict in data if value_dict.keys() - redundant_keys == 0]
 
 
 def task_3_find_item_via_value(data, value) -> DT:
@@ -40,11 +35,8 @@ def task_3_find_item_via_value(data, value) -> DT:
         find_item_via_value([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 26)
         >>> [{'name': 'Alex', 'age': 26}]
     """
-    sorting_data_list = []
-    for students in data:
-        if value in students.values():
-            sorting_data_list.append(students)
-    return sorting_data_list
+    return [students for students in data if value in students.values()]
+
 
 def task_4_min_value_integers(data) -> int:
     """
@@ -59,12 +51,9 @@ def task_5_min_value_strings(data) -> str:
     Find the longest string
     """
     if len(data) > 0:
-        data = [str(value) for value in data]
-        value_min = data[0]
-        for counter, value in enumerate(data):
-            if len(value) < len(value_min):
-                value_min = value
-        return value_min
+        data_len = [len(str(value)) for value in data]
+        min_index = data_len.index(min(data_len))
+        return str(data[min_index])
 
 
 def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
@@ -72,25 +61,15 @@ def task_6_min_value_list_of_dicts(data: DT, key: str) -> ST:
     Find minimum value by given key
     Returns:
     """
-    key_value_list = []
-    for dict_value in data:
-        if key in dict_value.keys():
-            key_value_list += [dict_value.get(key)]
-    for value in data:
-        if min(key_value_list) in value.values():
-            return value
+    key_value_list = [dict_value.get(key) for dict_value in data if key in dict_value.keys()]
+    return [value for value in data if min(key_value_list) in value.values()][0]
 
 
 def task_7_max_value_list_of_lists(data) -> int:
     """
     Find max value from list of lists
     """
-    comparison_value = 0
-    for data_element in data:
-        for value in data_element:
-            if value > comparison_value:
-                comparison_value = value
-    return comparison_value
+    return max(max([data_element + data_element for data_element in data]))
 
 
 def task_8_sum_of_ints(data) -> int:
@@ -132,5 +111,3 @@ def task_10_generator_of_simple_numbers() -> Generator[int, None, None]:
     for number in range(2, 200):
         if all(number % i != 0 for i in range(2, number)):
             yield number
-
-
