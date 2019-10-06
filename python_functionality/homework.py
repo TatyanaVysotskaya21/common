@@ -25,7 +25,7 @@ def task_2_remove_dict_fields(data, redundant_keys) -> DT:
        remove_dict_field([{'name': 'Alex', 'age': 26}, {'name': 'denys', 'age': 89}], 'age')
         >>> [{'name': 'Alex'}, {'name': 'denys'}]
     """
-    return [value_dict for value_dict in data if value_dict.keys() - redundant_keys == 0]
+    return [{key:val for key, val in value_dict.items() if key not in redundant_keys} for value_dict in data]
 
 
 def task_3_find_item_via_value(data, value) -> DT:
@@ -69,7 +69,7 @@ def task_7_max_value_list_of_lists(data) -> int:
     """
     Find max value from list of lists
     """
-    return max(max([data_element + data_element for data_element in data]))
+    return max(max([data_element for data_element in data]))
 
 
 def task_8_sum_of_ints(data) -> int:
