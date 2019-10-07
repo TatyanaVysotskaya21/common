@@ -104,14 +104,7 @@ class TaskTestCases(unittest.TestCase):
         self.assertEqual(letters_row_in_alphabetical_order(input_text), 'ehllo')
 
 
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
     unittest.main()
+
+
