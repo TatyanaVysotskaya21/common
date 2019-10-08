@@ -1,15 +1,5 @@
 import unittest
 from hw_5 import (
-    without_duplicates_list,
-    number_letter_a_in_str,
-    power_of_three,
-    result_single_digit,
-    zeros_to_the_end,
-    arithmetic_progression,
-    number_not_occur_twice,
-    missing_list_number,
-    count_elements_until_tuple,
-    string_reversed_order,
     number_hours_and_minutes,
     largest_word_in_string,
     string_in_backwards_order,
@@ -23,45 +13,6 @@ from hw_5 import (
 
 
 class TaskTestCases(unittest.TestCase):
-    def test_without_duplicates_list(self):
-        a =[1,1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
-        b =[1,2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
-        self.assertListEqual(without_duplicates_list(a, b), [1, 2, 3, 5, 8, 13])
-
-    def test_number_letter_a_in_str(self):
-        self.assertEqual(number_letter_a_in_str('I am a good developer. I am also a writer', 'a'), 5)
-
-    def test_power_of_three(self):
-        number = 9
-        self.assertTrue(power_of_three(number))
-
-    def test_result_single_digit(self):
-        number = 48
-        self.assertEqual(result_single_digit(number), 3)
-
-    def test_zeros_to_the_end(self):
-        new_list = [0,2,3,4,6,7,10]
-        self.assertListEqual(zeros_to_the_end(new_list), [2, 3, 4, 6, 7, 10, 0])
-
-    def test_arithmetic_progression(self):
-        list_progression = [5, 7, 9, 11]
-        self.assertTrue(arithmetic_progression(list_progression))
-
-    def test_number_not_occur_twice(self):
-        list_input = [5, 3, 4, 3, 4]
-        self.assertEqual(number_not_occur_twice(list_input), 5)
-
-    def test_missing_list_number(self):
-        list_input = [1,2,3,4,6,7,8]
-        self.assertEqual(missing_list_number(list_input), 5)
-
-    def test_count_elements_until_tuple(self):
-        list_input = [1,2,3,(1,2),3]
-        self.assertEqual(count_elements_until_tuple(list_input), 3)
-
-    def test_string_reversed_order(self):
-        str_input = "Hello World and Coders"
-        self.assertEqual(string_reversed_order(str_input), "sredoC dna dlroW olleH")
 
     def test_number_hours_and_minutes(self):
         number_input = 63
