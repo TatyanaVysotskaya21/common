@@ -1,4 +1,6 @@
 import unittest
+
+
 from hw_5 import (
     number_hours_and_minutes,
     largest_word_in_string,
@@ -8,8 +10,8 @@ from hw_5 import (
     sum_input_number,
     return_factorial_number,
     comparison_of_two_numbers,
-    alphabetical_shift_letters_in_line,
-    letters_row_in_alphabetical_order)
+    alpha_shift_letters_in_line,
+    letters_in_alphabet_order)
 
 
 class TaskTestCases(unittest.TestCase):
@@ -23,14 +25,17 @@ class TaskTestCases(unittest.TestCase):
         self.assertEqual(largest_word_in_string(str_input), 'love')
 
     def test_string_in_backwards_order(self):
-        self.assertEqual(string_in_backwards_order(lambda: "My name is Michele"), 'Michele is name My')
+        one_str = "My name is Michele"
+        two_str = "Michele is name My"
+        self.assertEqual(string_in_backwards_order(lambda: one_str), two_str)
 
     def test_output_fib_numbers_to_generate(self):
         self.assertEqual(output_fib_numbers_to_generate(lambda: 11), 144)
 
     def test_new_list_even_elements(self):
         input_list = [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
-        self.assertEqual(new_list_even_elements(input_list), [4, 16, 36, 64, 100])
+        output_list = [4, 16, 36, 64, 100]
+        self.assertEqual(new_list_even_elements(input_list), output_list)
 
     def test_sum_input_number(self):
         self.assertEqual(sum_input_number(lambda: 4), 10)
@@ -46,18 +51,14 @@ class TaskTestCases(unittest.TestCase):
         self.assertFalse(comparison_of_two_numbers(number_2, number_1))
         self.assertEqual(comparison_of_two_numbers(number_1, number_1), -1)
 
-    def test_alphabetical_shift_letters_in_line(self):
+    def test_alpha_shift_letters_in_line(self):
         input_text = 'abcd'
-        self.assertEqual(alphabetical_shift_letters_in_line(input_text), 'bcdE')
+        self.assertEqual(alpha_shift_letters_in_line(input_text), 'bcdE')
 
-    def test_letters_row_in_alphabetical_order(self):
+    def test_letters_in_alphabet_order(self):
         input_text = 'hello'
-        self.assertEqual(letters_row_in_alphabetical_order(input_text), 'ehllo')
+        self.assertEqual(letters_in_alphabet_order(input_text), 'ehllo')
 
 
 if __name__ == "__main__":
     unittest.main()
-
-
-
-
