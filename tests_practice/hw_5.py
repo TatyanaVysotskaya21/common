@@ -3,7 +3,7 @@ import string
 
 
 def without_duplicates_list(a, b):
-    return list(set(a) + set(b))
+    return list(set(a) - (set(a) - set(b)))
 
 
 def number_letter_a_in_str(a_str, letter):
