@@ -28,19 +28,20 @@ class Cat:
       if saturation_level eq 0 return text like this: "Your cat is died :("
     * Implement get_average_speed and return average_speed
     """
-    saturation_level = 50
 
     def __init__(self, age):
         self.age = age
         self.average_speed = average_speed
+        self.saturation_level = 50
+        self.dict_product = {'fodder': 10, 'apple': 5, 'milk': 2, 'gazelle': 30, 'rabbit': 15}
 
     def eat(self, product):
         if product == 'fodder':
-            self._increase_saturation_level(10)
+            self._increase_saturation_level(self.dict_product.get('fodder'))
         elif product == 'apple':
-            self._increase_saturation_level(5)
+            self._increase_saturation_level(self.dict_product.get('apple'))
         elif product == 'milk':
-            self._increase_saturation_level(2)
+            self._increase_saturation_level(self.dict_product.get('milk'))
 
     def _reduce_saturation_level(self, value):
         self.saturation_level -= value
@@ -97,9 +98,9 @@ class Cheetah(Cat):
     """
     def eat(self, product):
         if product == 'gazelle':
-            self._increase_saturation_level(30)
+            self._increase_saturation_level(self.dict_product.get('gazelle'))
         elif product == 'rabbit':
-            self._increase_saturation_level(15)
+            self._increase_saturation_level(self.dict_product.get('rabbit'))
 
     def _set_average_speed(self):
         if self.age <= 5:
@@ -248,11 +249,7 @@ class House:
       (from walls_square divide windows and door square)
     """
 
-    def __init__(self, wall, roof, window, door):
-        self.wall = wall
-        self.roof = roof
-        self.window = window
-        self.door = door
+    def __init__(self):
         self.__walls = []
         self.__window = []
         self.__roof = None
@@ -263,26 +260,26 @@ class House:
             raise ValueError("Value must be not 0")
         if len(self.__walls) >= 4:
             raise ValueError ("Our house can not have more than 4 walls")
-        self.__walls.append(self.wall(width, height))
+        self.__walls.append(Wall(width, height))
 
     def create_roof(self, width, height, roof_type):
-        if width or height == 0:
+        if width == 0 or height == 0:
             raise ValueError("Value must be not 0")
         if self.__roof:
             raise ValueError("The house can not have two roofs")
-        self.__roof = self.roof(width, height, roof_type)
+        self.__roof = Roof(width, height, roof_type)
 
     def create_window(self, width, height):
-        if width or height == 0:
+        if width == 0 or height == 0:
             raise ValueError("Value must be not 0")
-        self.__window.append(self.window(width, height))
+        self.__window.append(Window(width, height))
 
     def create_door(self, width, height):
-        if width or height == 0:
+        if width == 0 or height == 0:
             raise ValueError("Value must be not 0")
         if self.__door:
             raise ValueError("The house can not have two doors")
-        self.__door = self.door(width, height)
+        self.__door = Door(width, height)
 
     def get_count_of_walls(self):
         return len(self.__walls)
@@ -319,3 +316,4 @@ class House:
 
     def get_room_square(self):
         return self.get_walls_square() - self.get_windows_square() - self.get_roof_square()
+
