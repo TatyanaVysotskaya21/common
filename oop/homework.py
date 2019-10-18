@@ -57,7 +57,7 @@ class Cat:
             return 6
 
     def run(self, hours):
-        km_hours = hours * self.average_speed()
+        km_hours = hours * self.average_speed
         if km_hours <= 25:
             self._reduce_saturation_level(2)
         elif 25 < km_hours <= 50:
@@ -244,7 +244,7 @@ class House:
 
     def __init__(self):
         self.__walls = []
-        self.__window = []
+        self.__windows = []
         self.__roof = None
         self.__door = None
 
@@ -265,7 +265,7 @@ class House:
     def create_window(self, width, height):
         if width == 0 or height == 0:
             raise ValueError("Value must be not 0")
-        self.__window.append(Window(width, height))
+        self.__windows.append(Window(width, height))
 
     def create_door(self, width, height):
         if width == 0 or height == 0:
@@ -278,7 +278,7 @@ class House:
         return len(self.__walls)
 
     def get_count_of_windows(self):
-        return len(self.__window)
+        return len(self.__windows)
 
     def get_door_price(self, material_value):
         return self.__door.door_price(material_value)
@@ -293,10 +293,10 @@ class House:
         return self.__roof.roof_square()
 
     def get_walls_square(self):
-        return self.__walls.wall_square() * self.get_count_of_walls()
+        return sum(wall.wall_square() for wall in self.__walls)
 
     def get_windows_square(self):
-        return self.__window.windows_square() * self.get_count_of_windows()
+        return sum(window.window_square() for window in self.__windows)
 
     def get_door_square(self):
         return self.__door.door_square()
@@ -305,9 +305,9 @@ class House:
         if roll_width_m == 0 or roll_length_m == 0:
             raise ValueError("Sorry length must be not 0")
         else:
-            return int(
-                self.get_count_of_walls() * self.__walls.number_of_rolls_of_wallpaper(roll_width_m, roll_length_m))
+            return int(sum(w.number_of_rolls_of_wallpaper(roll_width_m, roll_length_m) for w in self.__walls))
 
     def get_room_square(self):
-        return self.get_walls_square() - self.get_windows_square() - self.get_roof_square()
+        return self.get_walls_square() - self.get_windows_square() - self.get_door_square()
 
+    
