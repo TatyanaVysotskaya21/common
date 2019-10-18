@@ -68,7 +68,7 @@ class Cat:
             self._reduce_saturation_level(25)
         else:
             self._reduce_saturation_level(50)
-        return f"Your cat ran {run_km} kilometers"
+        return f"Your cat ran {km_hours} kilometers"
 
     def get_saturation_level(self):
         if self.saturation_level == 0:
