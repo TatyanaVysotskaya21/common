@@ -31,17 +31,12 @@ class Cat:
 
     def __init__(self, age):
         self.age = age
-        self.average_speed = average_speed
+        self.average_speed = self._set_average_speed()
         self.saturation_level = 50
         self.dict_product = {'fodder': 10, 'apple': 5, 'milk': 2, 'gazelle': 30, 'rabbit': 15}
 
     def eat(self, product):
-        if product == 'fodder':
-            self._increase_saturation_level(self.dict_product.get('fodder'))
-        elif product == 'apple':
-            self._increase_saturation_level(self.dict_product.get('apple'))
-        elif product == 'milk':
-            self._increase_saturation_level(self.dict_product.get('milk'))
+        self._increase_saturation_level(self.dict_product.get(product, 0))
 
     def _reduce_saturation_level(self, value):
         self.saturation_level -= value
@@ -73,7 +68,7 @@ class Cat:
             self._reduce_saturation_level(25)
         else:
             self._reduce_saturation_level(50)
-        return f"Your cat ran {self.km_hours} kilometers"
+        return f"Your cat ran {run_km} kilometers"
 
     def get_saturation_level(self):
         if self.saturation_level == 0:
@@ -96,11 +91,9 @@ class Cheetah(Cat):
       if age between 5 and 15(including) return 90
       if age grosser 15(not including) return 40
     """
+
     def eat(self, product):
-        if product == 'gazelle':
-            self._increase_saturation_level(self.dict_product.get('gazelle'))
-        elif product == 'rabbit':
-            self._increase_saturation_level(self.dict_product.get('rabbit'))
+        self._increase_saturation_level(self.dict_product.get(product))
 
     def _set_average_speed(self):
         if self.age <= 5:
@@ -124,7 +117,7 @@ class Wall:
     """
 
     def __init__(self, width, height):
-        self.width =  width
+        self.width = width
         self.height = height
 
     def wall_square(self):
@@ -259,7 +252,7 @@ class House:
         if width == 0 or height == 0:
             raise ValueError("Value must be not 0")
         if len(self.__walls) >= 4:
-            raise ValueError ("Our house can not have more than 4 walls")
+            raise ValueError("Our house can not have more than 4 walls")
         self.__walls.append(Wall(width, height))
 
     def create_roof(self, width, height, roof_type):
@@ -287,7 +280,7 @@ class House:
     def get_count_of_windows(self):
         return len(self.__window)
 
-    def get_door_price(self, material_value ):
+    def get_door_price(self, material_value):
         return self.__door.door_price(material_value)
 
     def update_wood_price(self, new_wood_price):
@@ -310,10 +303,10 @@ class House:
 
     def get_number_of_rolls_of_wallpapers(self, roll_width_m, roll_length_m):
         if roll_width_m == 0 or roll_length_m == 0:
-            raise ValueError ("Sorry length must be not 0")
+            raise ValueError("Sorry length must be not 0")
         else:
-            return int(self.get_count_of_walls() * self.__walls.number_of_rolls_of_wallpaper(roll_width_m, roll_length_m))
+            return int(
+                self.get_count_of_walls() * self.__walls.number_of_rolls_of_wallpaper(roll_width_m, roll_length_m))
 
     def get_room_square(self):
         return self.get_walls_square() - self.get_windows_square() - self.get_roof_square()
-
