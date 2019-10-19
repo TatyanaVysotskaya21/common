@@ -28,12 +28,12 @@ class Cat:
       if saturation_level eq 0 return text like this: "Your cat is died :("
     * Implement get_average_speed and return average_speed
     """
-    dict_product = {'fodder': 10, 'apple': 5, 'milk': 2}
 
     def __init__(self, age):
         self.age = age
         self.saturation_level = 50
         self.average_speed = self._set_average_speed()
+        self.dict_product = {'fodder': 10, 'apple': 5, 'milk': 2}
 
     def eat(self, product):
         self._increase_saturation_level(self.dict_product.get(product, 0))
@@ -91,7 +91,10 @@ class Cheetah(Cat):
       if age between 5 and 15(including) return 90
       if age grosser 15(not including) return 40
     """
-    dict_product = {'gazelle': 30, 'rabbit': 15}
+
+    def __init__(self):
+        super(Cheetah, self).__init__(age)
+        self.dict_product = {'gazelle': 30, 'rabbit': 15}
 
     def eat(self, product):
         self._increase_saturation_level(self.dict_product.get(product, 0))
@@ -310,5 +313,3 @@ class House:
 
     def get_room_square(self):
         return self.get_walls_square() - self.get_windows_square() - self.get_door_square()
-
-    
