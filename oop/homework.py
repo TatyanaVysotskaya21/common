@@ -36,7 +36,7 @@ class Cat:
         self.average_speed = self._set_average_speed()
 
     def eat(self, product):
-        self._increase_saturation_level(dict_product.get(product, 0))
+        self._increase_saturation_level(self.dict_product.get(product, 0))
 
     def _reduce_saturation_level(self, value):
         self.saturation_level -= value
@@ -94,7 +94,7 @@ class Cheetah(Cat):
     dict_product = {'gazelle': 30, 'rabbit': 15}
 
     def eat(self, product):
-        self._increase_saturation_level(dict_product.get(product, 0))
+        self._increase_saturation_level(self.dict_product.get(product, 0))
 
     def _set_average_speed(self):
         if self.age <= 5:
@@ -310,3 +310,5 @@ class House:
 
     def get_room_square(self):
         return self.get_walls_square() - self.get_windows_square() - self.get_door_square()
+
+    
