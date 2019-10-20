@@ -33,11 +33,10 @@ class Cat:
         self.age = age
         self.saturation_level = 50
         self.average_speed = self._set_average_speed()
-        self.cat_dict_product = {'fodder': 10, 'apple': 5, 'milk': 2}
-        self.cheetah_dict_product = {'gazelle': 30, 'rabbit': 15}
+        self.dict_product = {'fodder': 10, 'apple': 5, 'milk': 2}
 
     def eat(self, product):
-        self._increase_saturation_level(self.cat_dict_product.get(product, 0))
+        self._increase_saturation_level(self.dict_product.get(product, 0))
 
     def _reduce_saturation_level(self, value):
         self.saturation_level -= value
@@ -93,8 +92,12 @@ class Cheetah(Cat):
       if age grosser 15(not including) return 40
     """
 
+    def __init__(self, age):
+        Cat.__init__(age)
+        self.dict_product = {'gazelle': 30, 'rabbit': 15}
+
     def eat(self, product):
-        self._increase_saturation_level(self.cheetah_dict_product.get(product, 0))
+        self._increase_saturation_level(self.dict_product.get(product, 0))
 
     def _set_average_speed(self):
         if self.age <= 5:
