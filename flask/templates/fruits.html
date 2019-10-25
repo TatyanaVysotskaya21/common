@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block some_content %}
+<h2>FRUITS:</h2>
+
+<ul>
+    {% for element in fruits_list %}
+    {% if element == "strawberry" %}
+    <li style="color:#8b1408;">{{element}}</li>
+    {% else %}
+    <li>{{element}}</li>
+    {% endif %}
+    {% endfor %}
+</ul>
+
+{% endblock %}
