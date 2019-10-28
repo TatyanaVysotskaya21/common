@@ -1,10 +1,17 @@
 {% extends "author.html" %}
+
+{% block title %}
+
+    {{ data[2].get("title", 0) }}
+
+{% endblock %}
+
+
 {% block some_content %}
 
-    <h1 style="padding:25px;"> {{data[2].get("title", 0)}} </h1>
-    <img src="{{url_for('static', filename='iPod.png')}}" width="200px" height="180px">
+    <h1 style="padding:25px;"> {{ data[2].get("title", 0) }} </h1>
+    <img src="{{ url_for('static', filename='iPod.png') }}" width="200px" height="180px">
     <div style="padding:25px;">{{ data[2].get("text", 0) }} </div>
     <p style="padding:25px;"> Count of words in text: {{ data[2].get("text", 0) |length() }}</p>
-
 
 {% endblock %}

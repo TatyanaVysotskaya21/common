@@ -1,4 +1,10 @@
 {% extends "author.html" %}
+
+{% block title %}
+    {{ data[3].get("title", 0) }}
+{% endblock %}
+
+
 {% block some_content %}
 
     <h1 style="padding:25px;"> {{data[3].get("title", 0)}} </h1>
