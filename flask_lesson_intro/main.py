@@ -6,42 +6,27 @@ app = Flask(__name__)
 
 @app.route('/')
 def get_home_page():
-    return render_template("home.html", data=get_data())
+    title = "Home"
+    return render_template("home.html", title=title)
 
 
-@app.route('/alarm_clock')
-def get_alarm_clock():
-    return render_template("alarm_clock.html", data=get_data())
-
-
-@app.route('/headphones')
-def get_headphones():
-    return render_template("headphones.html", data=get_data())
-
-
-@app.route('/iPod')
-def get_iPod():
-    return render_template("iPod.html", data=get_data())
-
-
-@app.route('/calculator')
-def get_calculator():
-    return render_template("calculator.html", data=get_data())
-
-
-@app.route('/coffeemaker')
-def get_coffeemaker():
-    return render_template("coffeemaker.html", data=get_data())
-
-
-@app.route('/battery_charger')
-def get_battery_charger():
-    return render_template("battery_charger.html", data=get_data())
+@app.route('/<name_product>')
+def get_name_product(name_product):
+    for product in get_data():
+        if product["title"] == name_product:
+            return render_template("base.html",
+                                   title=product["title"],
+                                   text=product["text"],
+                                   img=product["img"],
+                                   text_length=len(product["text"]))
+    else:
+        return render_template("error_tab.html")
 
 
 @app.route('/author')
 def get_author():
-    return render_template("author.html")
+    title = "Author"
+    return render_template("author.html", title=title)
 
 
 if __name__ == "__main__":
