@@ -2,5 +2,5 @@ import json
 
 
 def get_data():
-    with open("data.json") as file:
-        return json.load(file)
+    with open("data.json") as f:
+        return json.load(f)
