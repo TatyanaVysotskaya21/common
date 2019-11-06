@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title%}
+    Products
+{% endblock %}
+
+{% block some_content %}
+
+<div style="padding: 25px">
+
+    {% for el in data %}
+    {% if request.args.get('price') == el['price']%}
+    {% if session[el['name']] == 'visited_page' %}
+    <h4><a style="pointer-events: none;"
+           href="{{url_for('product.product_page', info_product=el['name'])}}">{{el['name']}}</a></h4>
+    {%else%}
+    <h4><a href="{{url_for('product.product_page', info_product=el['name'])}}">{{el['name']}}</a></h4>
+    {%endif%}
+    {% elif request.args.get('price') == None %}
+    {% if session[el['name']] == 'visited_page' %}
+    <h4><a style="pointer-events: none;"
+           href="{{url_for('product.product_page', info_product=el['name'])}}">{{el['name']}}</a></h4>
+    {%else%}
+    <h4><a href="{{url_for('product.product_page', info_product=el['name'])}}">{{el['name']}}</a></h4>
+    {%endif%}
+    {%endif%}
+    {% endfor %}
+</div>
+
+<div style="padding: 25px" ><a href="{{url_for('product.add_product')}}" style="color: red"> <b>Add new product</b></a>
+
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title%}
+All_markets
+{% endblock %}
+
+{% block some_content %}
+
+<div style="padding: 25px">
+
+    {% for el in data %}
+    {% if request.args.get('location') == el['location']%}
+    {% if session[market] == 'visited_page' %}
+    <h4><a style="pointer-events: none;"
+           href="{{url_for('markets.market_page', market=el['name'])}}">{{el['name']}}</a></h4>
+    {%else%}
+    <h4><a href="{{url_for('markets.market_page', market=el['name'])}}">{{el['name']}}</a></h4>
+    {%endif%}
+    {% elif request.args.get('location') == None %}
+    {% if session[market] == 'visited_page' %}
+    <h4><a style="pointer-events: none;"
+           href="{{url_for('markets.market_page', market=el['name'])}}">{{el['name']}}</a></h4>
+    {%else%}
+    <h4><a href="{{url_for('markets.market_page', market=el['name'])}}">{{el['name']}}</a></h4>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+</div>
+
+<div style="padding: 25px" ><a href="{{url_for('markets.add_market')}}" style="color: red"> <b>Add new market</b></a>
+
+</div>
+
+{% endblock %}
