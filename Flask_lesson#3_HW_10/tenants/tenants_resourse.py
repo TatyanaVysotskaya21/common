@@ -3,13 +3,9 @@ from flask_restful import Resource, marshal_with, fields
 from tenants.tenant_object import Tenants
 from tenants.tenants_parser import parser_tenant
 
-
-list_tenants = [Tenants('Artur', 'AH768549', 29, 'M', {'sity': 'Dnipro',
-                                                         'street': 'Shevchenko'}, 129),
-                Tenants('Anna', 'AH769889', 36, 'F', {'sity': 'Lviv',
-                                                        'street': 'Pugachova'}, 152),
-                Tenants('Anton', 'AH078549', 19, 'M', {'sity': 'Dnipro',
-                                                         'street': 'Savchenko'}, 198)]
+list_tenants = [Tenants('Artur', 'AH768549', 29, 'M', {'sity': 'Dnipro', 'street': 'Shevchenko'}, 129),
+                Tenants('Anna', 'AH769889', 36, 'F', {'sity': 'Lviv', 'street': 'Pugachova'}, 152),
+                Tenants('Anton', 'AH078549', 19, 'M', {'sity': 'Dnipro', 'street': 'Savchenko'}, 198)]
 
 adress_structure = {'sity': fields.String,
                     'street': fields.String}
@@ -42,4 +38,3 @@ class GetTenants(Resource):
             if parser_tenant.parse_args().get('passportID') == ten.passportID:
                 list_tenants.remove(ten)
                 return list_tenants, 200
-

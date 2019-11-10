@@ -6,5 +6,5 @@ bp_staff = Blueprint("bp_staff", __name__)
 api = Api(bp_staff)
 
 
-api.add_resource(GetStaff, '/staff')
+api.add_resource(GetStaff, '/staff', '/staff/<string:id>')
 

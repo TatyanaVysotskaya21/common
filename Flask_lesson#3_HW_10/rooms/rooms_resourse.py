@@ -3,9 +3,9 @@ from flask_restful import Resource, marshal_with, fields
 from rooms.room_object import Rooms
 from rooms.rooms_parser import parser_room
 
-list_rooms = [Rooms(123, "standart", "closed", 150),
-              Rooms(246, "standart", "open", 175),
-              Rooms(543, "lux", "open", 500)]
+list_rooms = [Rooms(235, "standart", "closed", 250),
+              Rooms(826, "standart", "open", 250),
+              Rooms(125, "lux", "open", 500)]
 
 rooms_structure = {'number': fields.Integer,
                    'level': fields.String,

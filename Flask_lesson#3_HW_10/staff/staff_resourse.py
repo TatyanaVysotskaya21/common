@@ -23,6 +23,12 @@ class GetStaff(Resource):
                 return staff
         return list_staff
 
+    def put(self, id):
+        for staff in list_staff:
+            if staff.passportID == id:
+                staff.salary = parser_staff.parse_args().get('salary')
+                return staff, 200
+
     def delete(self):
         for staff in list_staff:
             if parser_staff.parse_args().get("passportID") == staff.passportID:
