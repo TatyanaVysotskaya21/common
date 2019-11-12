@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 
 {% block title%}
-Add_Market
+  Add_Market
 {% endblock %}
 
 {% block some_content %}
 
 <h2 style="padding: 25px; padding-top: 25px">Add new market</h2>
 
-
-<form action="/sup_submit" method="post"  enctype = "multipart/form-data" style="padding-left: 30px">
+<form action="/sup_submit" method="post" enctype="multipart/form-data" style="padding-left: 30px">
     {{form.hidden_tag()}}
     <p>
         Please enter Name:<br>

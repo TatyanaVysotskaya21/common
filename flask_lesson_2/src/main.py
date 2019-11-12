@@ -1,19 +1,17 @@
 from datetime import timedelta
 
-from flask import Flask, render_template, session
+from flask import Flask, render_template
 from src.product.blueprint_product import product
 from src.supermarket.blueprint_supermarkets import markets
-
 
 app = Flask(__name__, template_folder='templates')
 
 app.register_blueprint(markets)
 app.register_blueprint(product)
 
-
 app.config['SECRET_KEY'] = 'a really really really really long secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
-app.permanent_session_lifetime = timedelta(seconds=10)
+app.permanent_session_lifetime = timedelta(seconds=5)
 
 
 @app.route("/")
@@ -28,4 +26,3 @@ def page_error(error):
 
 if __name__ == "__main__":
     app.run(debug=True)
-

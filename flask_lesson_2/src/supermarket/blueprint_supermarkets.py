@@ -9,16 +9,17 @@ from src.utils import get_data, add_data
 
 markets = Blueprint("markets", __name__, template_folder='template', static_folder='static')
 
-json_file = 'markets.json'
+json_file = 'src/supermarket/markets.json'
 path_img = '/home/k426/GitHub_repos/common/flask_lesson_2/src/static'
 
 
 @markets.route("/supermarkets")
 def get_supermarkets():
-    if request.method == 'GET':
-        return render_template('all_markets.html', data=get_data(json_file))
-    elif request.method == 'POST':
-        return redirect(url_for('products?location=<location>', location=request.form.get('location')))
+    get_dict = {'GET': render_template('all_markets.html', data=get_data(json_file)),
+                'POST': "redirect(url_for('products?location=<location>', location=request.form.get('location')))"}
+    for key in get_dict:
+        if request.method == key:
+            return get_dict.get(key)
 
 
 @markets.route("/add_market", methods=['POST', 'GET'])
@@ -29,7 +30,6 @@ def add_market():
 
 @markets.route('/sup_submit', methods=['POST'])
 def save_market():
-
     d = {'id': str(uuid.uuid4()), 'name': request.form.get('name'), 'img_name': upload_image(),
          'location': request.form.get('location')}
 
@@ -51,8 +51,8 @@ def upload_image():
 @markets.route('/supermarkets/<market>')
 def market_page(market):
     for i in get_data(json_file):
-        if i["name"] == market or i['id'] == market:
-            session[market] = 'visited_page'
+        if i['name'] == market or i['id'] == market:
+            session[market] = True
             return render_template('market.html',
                                    title=i["name"],
                                    location=i["location"],

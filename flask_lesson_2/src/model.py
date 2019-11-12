@@ -16,3 +16,4 @@ class AddMarketForm(FlaskForm):
     location = StringField("Location: ", validators=[DataRequired()])
     img_name = FileField("Img_name: ", validators=[InputRequired()])
     submit = SubmitField("Submit")
+
