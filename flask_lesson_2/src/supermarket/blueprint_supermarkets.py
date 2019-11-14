@@ -1,25 +1,23 @@
 import os
 import uuid
 
-from flask import Blueprint, render_template, redirect, request, url_for, session
+from flask import Blueprint, render_template, request, session
 from werkzeug.utils import secure_filename
 
 from src.model import AddMarketForm
 from src.utils import get_data, add_data
 
-markets = Blueprint("markets", __name__, template_folder='template', static_folder='static')
+markets = Blueprint("markets", __name__, template_folder='template')
 
-json_file = 'src/supermarket/markets.json'
-path_img = '/home/k426/GitHub_repos/common/flask_lesson_2/src/static'
+json_file = 'markets.json'
+path_img = 'static'
 
 
 @markets.route("/supermarkets")
 def get_supermarkets():
     get_dict = {'GET': render_template('all_markets.html', data=get_data(json_file)),
                 'POST': "redirect(url_for('products?location=<location>', location=request.form.get('location')))"}
-    for key in get_dict:
-        if request.method == key:
-            return get_dict.get(key)
+    return get_dict.get(request.method)
 
 
 @markets.route("/add_market", methods=['POST', 'GET'])
@@ -30,7 +28,9 @@ def add_market():
 
 @markets.route('/sup_submit', methods=['POST'])
 def save_market():
-    d = {'id': str(uuid.uuid4()), 'name': request.form.get('name'), 'img_name': upload_image(),
+    d = {'id': str(uuid.uuid4()),
+         'name': request.form.get('name'),
+         'img_name': upload_image(),
          'location': request.form.get('location')}
 
     data = get_data(json_file)
@@ -51,8 +51,8 @@ def upload_image():
 @markets.route('/supermarkets/<market>')
 def market_page(market):
     for i in get_data(json_file):
-        if i['name'] == market or i['id'] == market:
-            session[market] = True
+        if i["name"] == market or i['id'] == market:
+            session[market] = 'visited_page'
             return render_template('market.html',
                                    title=i["name"],
                                    location=i["location"],

@@ -1,25 +1,23 @@
 import os
 import uuid
 
-from flask import Blueprint, render_template, request, session
-from werkzeug.utils import secure_filename
+from flask import Blueprint, render_template, request, session, url_for
+from werkzeug.utils import secure_filename, redirect
 
 from src.model import AddProductForm
 from src.utils import get_data, add_data
 
-product = Blueprint("product", __name__, template_folder='template', static_folder='static')
+product = Blueprint("product", __name__, template_folder='template')
 
-json_file = 'src/product/product.json'
-path_img = '/home/k426/GitHub_repos/common/flask_lesson_2/src/static'
+json_file = 'product.json'
+path_img = 'static'
 
 
 @product.route("/products", methods=['POST', 'GET'])
 def get_products():
     get_dict = {'GET': render_template('all_products.html', data=get_data(json_file)),
                 'POST': "redirect(url_for('products?price=<price>', price=request.form.get('price')))"}
-    for key in get_dict:
-        if request.method == key:
-            return get_dict.get(key)
+    return get_dict.get(request.method)
 
 
 @product.route("/add_product", methods=['POST', 'GET'])
@@ -30,13 +28,22 @@ def add_product():
 
 @product.route('/submit', methods=['POST'])
 def save_product():
-    d = {'id': str(uuid.uuid4()), 'name': request.form.get('name'), 'description': request.form.get('description'),
-         'price': request.form.get('price'), 'img_name': upload_image()}
+    d = {'id': str(uuid.uuid4()),
+         'name': request.form.get('name'),
+         'description': request.form.get('description'),
+         'price': request.form.get('price'),
+         'img_name': upload_image()}
 
-    data = get_data(json_file)
-    data.append(d)
-    add_data(data, json_file)
-    return render_template('all_products.html', data=get_data(json_file))
+    try:
+        if int(d.get('price')) > 0:
+            data = get_data(json_file)
+            data.append(d)
+            add_data(data, json_file)
+            return render_template('all_products.html', data=get_data(json_file))
+        else:
+            return redirect(url_for('product.add_product'))
+    except (ValueError, TypeError):
+        return redirect(url_for('product.add_product'))
 
 
 @product.route('/upload', methods=['POST'])
