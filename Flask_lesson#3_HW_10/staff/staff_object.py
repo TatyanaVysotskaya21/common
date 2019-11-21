@@ -4,5 +4,3 @@ class Staff:
         self.passportID = passportID
         self.position = position
         self.salary = salary
-
-

@@ -17,13 +17,13 @@ class GetRooms(Resource):
     method_decorators = [marshal_with(rooms_structure)]
 
     def get(self):
-        for room in list_rooms:
-            if parser_room.parse_args().get('number') == room.number:
-                return room
-        if parser_room.parse_args().get('status'):
-            return [room for room in list_rooms if parser_room.parse_args().get('status') == room.status]
+        get_rooms = {"number": [room for room in list_rooms if parser_room.parse_args().get('number') == room.number],
+                     "status": [room for room in list_rooms if parser_room.parse_args().get('status') == room.status]}
+
+        for key in parser_room.parse_args():
+            return get_rooms.get(key)
         else:
-            return list_rooms
+            return [room for room in list_rooms]
 
     def post(self):
         list_rooms.append(Rooms(parser_room.parse_args().get('number'),

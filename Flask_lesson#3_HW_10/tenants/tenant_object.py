@@ -6,5 +6,3 @@ class Tenants:
         self.sex = sex
         self.adress = adress
         self.room = room
-
-

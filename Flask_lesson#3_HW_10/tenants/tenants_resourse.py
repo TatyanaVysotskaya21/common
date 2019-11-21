@@ -22,14 +22,14 @@ class GetTenants(Resource):
     method_decorators = [marshal_with(tenants_structure)]
 
     def get(self):
-        for ten in list_tenants:
-            if parser_tenant.parse_args().get('passportID') == ten.passportID:
-                return ten
-        return list_tenants
+        if parser_tenant.parse_args().get('passportID') is None:
+            return [ten for ten in list_tenants]
+        else:
+            return [ten for ten in list_tenants if parser_tenant.parse_args().get('passportID') == ten.passportID]
 
-    def put(self, id):
+    def put(self, some_id):
         for ten in list_tenants:
-            if ten.passportID == id:
+            if ten.passportID == some_id:
                 ten.room = parser_tenant.parse_args().get('room')
                 return ten, 200
 
