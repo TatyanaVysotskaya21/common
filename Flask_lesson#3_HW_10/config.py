@@ -16,4 +16,4 @@ class ProductionConfig(Config):
 
 def run_config():
     get_env = {"TEST": TestConfig, "PROD": ProductionConfig}
-    return get_env.get(os.environ.get('ENV'))
+    return get_env.get(os.environ.get('ENV'), Config)
