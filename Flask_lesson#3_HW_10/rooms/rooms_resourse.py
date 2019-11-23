@@ -29,10 +29,7 @@ class GetRooms(Resource):
             return self.list_rooms
 
     def post(self):
-        self.list_rooms.append(Rooms(parser_room.parse_args().get('number'),
-                                     parser_room.parse_args().get('level'),
-                                     parser_room.parse_args().get('status'),
-                                     parser_room.parse_args().get('price')))
+        self.list_rooms.append(Rooms(**parser_room.parse_args()))
         return self.list_rooms, 200
 
     def put(self, id_room):
@@ -40,9 +37,13 @@ class GetRooms(Resource):
             if room.number == id_room:
                 room.status = parser_room.parse_args().get('status')
                 return room, 200
+            else:
+                return 404
 
     def delete(self):
         for room in self.list_rooms:
             if parser_room.parse_args().get('number') == room.number:
                 self.list_rooms.remove(room)
                 return self.list_rooms, 200
+            else:
+                return 404
