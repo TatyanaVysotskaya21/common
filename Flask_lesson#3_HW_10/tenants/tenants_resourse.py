@@ -1,6 +1,6 @@
 from flask_restful import Resource, marshal_with
 
-from tenants.tenant_object import tenants_structure
+from tenants.tenant_object import tenants_structure, list_tenants
 from tenants.tenants_parser import parser_tenant
 
 
@@ -9,12 +9,12 @@ class GetTenants(Resource):
 
     def get(self):
         if parser_tenant.parse_args().get('passportID') is None:
-            return self.list_tenants
+            return list_tenants
         else:
-            return [ten for ten in self.list_tenants if parser_tenant.parse_args().get('passportID') == ten.passportID]
+            return [ten for ten in list_tenants if parser_tenant.parse_args().get('passportID') == ten.passportID]
 
     def put(self, some_id):
-        for ten in self.list_tenants:
+        for ten in list_tenants:
             if ten.passportID == some_id:
                 ten.room = parser_tenant.parse_args().get('room')
                 return ten, 200
@@ -22,9 +22,9 @@ class GetTenants(Resource):
                 return 404
 
     def delete(self):
-        for ten in self.list_tenants:
+        for ten in list_tenants:
             if parser_tenant.parse_args().get('passportID') == ten.passportID:
-                self.list_tenants.remove(ten)
-                return self.list_tenants, 200
+                list_tenants.remove(ten)
+                return list_tenants, 200
             else:
                 return 404

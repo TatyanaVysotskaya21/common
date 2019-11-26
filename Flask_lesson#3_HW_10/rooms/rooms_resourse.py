@@ -22,7 +22,7 @@ class GetRooms(Resource):
         for obj_room in list_rooms:
             if obj_room.number == parser_room.parse_args().get('number'):
                 return "such number already exists"
-        if parser_room.parse_args().get('number') <= 0:
+        if parser_room.parse_args().get('number') <= 0 or parser_room.parse_args().get('price') <= 0:
             return "number cannot have a negative value"
         list_rooms.append(Rooms(**parser_room.parse_args()))
         return "ok"

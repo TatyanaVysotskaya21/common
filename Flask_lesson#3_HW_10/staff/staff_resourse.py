@@ -1,6 +1,6 @@
 from flask_restful import Resource, marshal_with
 
-from staff.staff_object import staff_structure
+from staff.staff_object import staff_structure, list_staff
 from staff.staff_parser import parser_staff
 
 
@@ -23,9 +23,9 @@ class GetStaff(Resource):
                 return 404
 
     def delete(self):
-        for staff in self.list_staff:
+        for staff in list_staff:
             if parser_staff.parse_args().get("passportID") == staff.passportID:
-                self.list_staff.remove(staff)
-                return self.list_staff, 200
+                list_staff.remove(staff)
+                return list_staff, 200
             else:
                 return 404
