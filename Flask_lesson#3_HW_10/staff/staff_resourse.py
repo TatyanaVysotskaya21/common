@@ -1,20 +1,10 @@
-from flask_restful import Resource, marshal_with, fields
+from flask_restful import Resource, marshal_with
 
-from staff.staff_object import Staff
+from staff.staff_object import staff_structure
 from staff.staff_parser import parser_staff
 
 
 class GetStaff(Resource):
-    staff_structure = {'name': fields.String,
-                       'passportID': fields.String,
-                       'position': fields.String,
-                       'salary': fields.Integer}
-
-    def __init__(self):
-        self.list_staff = [Staff("Anna", "AH586898", "chambermaid", 5550),
-                           Staff("Alex", "AH582564", "administrator", 7000),
-                           Staff("David", "AH369647", "receptionist", 6000)]
-
     method_decorators = [marshal_with(staff_structure)]
 
     def get(self):

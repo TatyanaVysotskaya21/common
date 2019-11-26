@@ -1,24 +1,10 @@
-from flask_restful import Resource, marshal_with, fields
+from flask_restful import Resource, marshal_with
 
-from tenants.tenant_object import Tenants
+from tenants.tenant_object import tenants_structure
 from tenants.tenants_parser import parser_tenant
 
 
 class GetTenants(Resource):
-    def __init__(self):
-        self.list_tenants = [Tenants('Artur', 'AH768549', 29, 'M', {'sity': 'Dnipro', 'street': 'Shevchenko'}, 129),
-                             Tenants('Anna', 'AH769889', 36, 'F', {'sity': 'Lviv', 'street': 'Pugachova'}, 152),
-                             Tenants('Anton', 'AH078549', 19, 'M', {'sity': 'Dnipro', 'street': 'Savchenko'}, 198)]
-
-    address_structure = {'sity': fields.String,
-                         'street': fields.String}
-
-    tenants_structure = {'name': fields.String,
-                         'passportID': fields.String,
-                         'age': fields.Integer,
-                         'sex': fields.String,
-                         'address': fields.Nested(address_structure),
-                         'room': fields.Integer}
     method_decorators = [marshal_with(tenants_structure)]
 
     def get(self):
