@@ -19,8 +19,8 @@ class GetStaff(Resource):
             if staff.passportID == some_id:
                 staff.salary = parser_staff.parse_args().get('salary')
                 return staff, 200
-            else:
-                return 404
+        else:
+            return 404
 
     def delete(self):
         for staff in list_staff:

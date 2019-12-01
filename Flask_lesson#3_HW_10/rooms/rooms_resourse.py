@@ -32,8 +32,8 @@ class GetRooms(Resource):
             if room.number == id_room:
                 room.status = parser_room.parse_args().get('status')
                 return "ok", 200
-            else:
-                return 404
+        else:
+            return 404
 
     def delete(self):
         for room in list_rooms:

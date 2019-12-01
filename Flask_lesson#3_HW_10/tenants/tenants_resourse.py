@@ -18,8 +18,8 @@ class GetTenants(Resource):
             if ten.passportID == some_id:
                 ten.room = parser_tenant.parse_args().get('room')
                 return ten, 200
-            else:
-                return 404
+        else:
+            return 404
 
     def delete(self):
         for ten in list_tenants:
